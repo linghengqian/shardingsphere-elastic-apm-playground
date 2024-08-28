@@ -1,0 +1,21 @@
+services:
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.1
+    volumes:
+      - esdata01:/usr/share/elasticsearch/data
+    expose:
+      - 9200
+      - 9300
+    environment:
+      ELASTIC_PASSWORD: es01Bloodline
+      discovery.type: single-node
+      xpack.security.http.ssl.enabled: false
+      TZ: Asia/Shanghai
+    restart: always
+    mem_limit: '1gb'
+    networks:
+      - elastic-net
+volumes:
+  esdata01:
+networks:
+  elastic-net:

@@ -1,0 +1,6 @@
+plugins:
+  tracing:
+    OpenTelemetry:
+      props:
+        otel.service.name: "3-shardingsphere-smoke-tests"
+        otel.exporter.otlp.traces.endpoint: "http://localhost:24321"

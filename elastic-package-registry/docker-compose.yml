@@ -1,0 +1,13 @@
+services:
+  elastic-package-registry:
+    image: docker.elastic.co/package-registry/distribution:8.15.1
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - elasticsearch_elastic-net
+    expose:
+      - 8080
+networks:
+  elasticsearch_elastic-net:
+    external: true

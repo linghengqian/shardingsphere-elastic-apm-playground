@@ -1,0 +1,17 @@
+services:
+  fleet-server:
+    image: docker.elastic.co/beats/elastic-agent:8.15.1
+    restart: always
+    environment:
+      FLEET_SERVER_ENABLE: 1
+      FLEET_SERVER_ELASTICSEARCH_HOST: "http://es01:9200"
+      FLEET_SERVER_SERVICE_TOKEN: "AAEAAWVsYXN0aWMvZmxlZXQtc2VydmVyL3Rva2VuLTE3MjU3OTQwNjkwNTU6UDFQaEJINVRRM0NacFFSVDd2cUV1QQ"
+      FLEET_SERVER_POLICY_ID: "fleet-server-policy"
+      TZ: Asia/Shanghai
+    networks:
+      - elasticsearch_elastic-net
+    expose:
+      - 8220
+networks:
+  elasticsearch_elastic-net:
+    external: true

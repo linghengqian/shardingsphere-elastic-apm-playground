@@ -1,6 +1,6 @@
 services:
   kibana:
-    image: docker.elastic.co/kibana/kibana:8.15.2
+    image: docker.elastic.co/kibana/kibana-wolfi:9.2.3
     restart: always
     mem_limit: '1gb'
     environment:
@@ -11,6 +11,7 @@ services:
       I18N_LOCALE: zh-CN
       XPACK_FLEET_ISAIRGAPPED: true
       XPACK_FLEET_REGISTRYURL: http://elastic-package-registry:8080
+      XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY: min-32-byte-long-strong-encryption-key
     volumes:
       - kibanadata:/usr/share/kibana/data
     ports:

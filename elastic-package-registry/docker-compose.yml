@@ -1,6 +1,6 @@
 services:
   elastic-package-registry:
-    image: docker.elastic.co/package-registry/distribution:8.15.2
+    image: docker.elastic.co/package-registry/distribution:9.2.3
     restart: always
     environment:
       TZ: Asia/Shanghai

@@ -1,12 +1,12 @@
 services:
   elastic-agent:
-    image: docker.elastic.co/beats/elastic-agent:8.15.2
+    image: docker.elastic.co/elastic-agent/elastic-agent-wolfi:9.2.3
     user: root
     restart: always
     environment:
       FLEET_ENROLL: 1
       FLEET_URL: "https://fleet-server:8220"
-      FLEET_ENROLLMENT_TOKEN: "NVhlY2k1SUJyNmg5TzRtTUJfZmw6OG1RRWVzTnhUT1dQMHczM3FpNHJhdw=="
+      FLEET_ENROLLMENT_TOKEN: "SjlPLWw1c0JXd1lHa3diUWl6ZWo6MG5OaldHdjNSMU1ObS1kRmhESTlxZw=="
       TZ: Asia/Shanghai
       FLEET_INSECURE: true
     networks:

@@ -12,3 +12,11 @@ Content like `AAEAAWVsYXN0aWMvZmxlZXQtc2VydmVyL3Rva2VuLTE3MjU3OTQwNjkwNTU6UDFQaE
 and the related Kibana instance has been destroyed.
 The entire Git is only used to serve the interpretation of the relevant article.
 In fact, there is no Generic High Entropy Secret that needs to be removed.
+
+# For ShardingSphere Agent 5.5.3-SNAPSHOT test
+
+```bash
+cd ./shardingsphere-elastic-apm-playground/
+docker compose --file ./shardingsphere-smoke-tests/compose.yaml up -d
+docker compose --file ./shardingsphere-smoke-tests/compose.yaml down -v
+```

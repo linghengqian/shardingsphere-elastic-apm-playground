@@ -1,0 +1,25 @@
+services:
+  shardingsphere-smoke-tests:
+    image: linghengqian/shardingsphere-smoke-tests:latest
+    pull_policy: build
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM maven:3.9.12-eclipse-temurin-25-noble AS ssbuild
+        WORKDIR /build
+        RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+          --mount=type=cache,target=/var/lib/apt,sharing=locked \
+          apt update && apt install -y git
+        RUN git clone -b fix-agent --depth 1 https://github.com/linghengqian/shardingsphere.git
+        WORKDIR /build/shardingsphere
+        RUN --mount=type=cache,target=/root/.m2 mvn clean install -Prelease -T1C -DskipTests -Djacoco.skip=true -Dcheckstyle.skip=true -Drat.skip=true -Dmaven.javadoc.skip=true
+
+        FROM maven:3.9.12-eclipse-temurin-25-noble AS jitbuild
+        WORKDIR /build
+        COPY ./ ./
+        RUN --mount=type=cache,target=/root/.m2 mvn clean package -T1C -DskipTests
+
+        FROM ghcr.io/apache/shardingsphere-agent:latest
+        COPY --from=jitbuild /build/target/*.jar /app.jar
+        COPY ./custom-agent.yaml /usr/agent/conf/agent.yaml
+        ENTRYPOINT ["java","-javaagent:/usr/agent/shardingsphere-agent.jar","-jar","/app.jar"]
